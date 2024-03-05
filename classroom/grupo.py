@@ -3,7 +3,11 @@ from classroom.asignatura import Asignatura
 class Grupo:
     grado = None
 
-    def __init__(self, grupo="grupo predeterminado", asignaturas=[], estudiantes=None):
+    def __init__(self, grupo="grupo predeterminado", asignaturas=None, estudiantes=None):
+        if asignaturas is None:
+            asignaturas = []
+        if estudiantes is None:
+            estudiantes = []
         self._grupo = grupo
         self._asignaturas = asignaturas
         self.listadoAlumnos = estudiantes
@@ -17,10 +21,8 @@ class Grupo:
         if lista is None:
             lista = []
         lista.append(alumno)
-        if self.listadoAlumnos is None:
-            self.listadoAlumnos = lista
-        else:
-            self.listadoAlumnos += lista
+        for elemento in lista:
+            self.listadoAlumnos.append(elemento)
 
     def __str__(self):
          return "Grupo de estudiantes: " + self._grupo
